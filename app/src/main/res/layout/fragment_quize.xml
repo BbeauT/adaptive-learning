@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:paddingTop="16dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/quiz_id"
+            android:layout_width="64dp"
+            android:textAllCaps="true"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/quiz_course_name_id"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/quiz_date_id"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="1dp"/>
+
+</LinearLayout>

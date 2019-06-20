@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:paddingTop="16dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/course_code_id"
+            android:layout_width="64dp"
+            android:textAllCaps="true"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/course_name_id"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/course_instructor_id"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="1dp"/>
+
+
+</LinearLayout>

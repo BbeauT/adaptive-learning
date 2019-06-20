@@ -1,8 +1,12 @@
 package com.example.btarekegn.schoolapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,24 +17,32 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.btarekegn.schoolapp.dummy.DummyContent;
+import com.example.btarekegn.schoolapp.entity.Course;
+import com.example.btarekegn.schoolapp.entity.Quiz;
+import com.example.btarekegn.schoolapp.entity.User;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        StudentFragment.OnListFragmentInteractionListener,
+        QuizeFragment.OnListFragmentInteractionListener,
+        CourseFragment.OnListFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        CourseFragment fragment = new CourseFragment();
+        fragmentTransaction.add(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -80,22 +92,53 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        } else if (id == R.id.nav_slideshow) {
+        if (id == R.id.nav_course) {
+            CourseFragment fragment = new CourseFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        } else if (id == R.id.nav_manage) {
+            transaction.replace(R.id.fragment_container, fragment);
+            transaction.addToBackStack(null);
 
-        } else if (id == R.id.nav_share) {
+            transaction.commit();
+        } else if (id == R.id.nav_exam) {
 
-        } else if (id == R.id.nav_send) {
+            Fragment newFragment = new QuizeFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.fragment_container, newFragment);
+            transaction.addToBackStack(null);
+
+            transaction.commit();
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onListFragmentInteraction(User item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Course item) {
+
+        Intent intent = new Intent(this,  CourseDetailActivity.class);
+        intent.putExtra("courseResourceUrl", item.getResourceUrl());
+        startActivity(intent);
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Quiz item) {
+
+        Intent intent = new Intent(this,  CourseDetailActivity.class);
+        intent.putExtra("quizResourceUrl", item.getQuizResourceUrl());
+        startActivity(intent);
     }
 }

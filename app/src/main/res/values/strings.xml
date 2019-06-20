@@ -1,15 +1,17 @@
 <resources>
-    <string name="app_name">Selam App</string>
+    <string name="app_name">Adaptive Learning</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">Adaptive Learning</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
+    <string name="prompt_password">Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="confirm_prompt_password">Confirm Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Register</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -18,7 +20,20 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="welcome_message">Welcome TVET Collage</string>
+    <string name="register_page_title">Register</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="invalid_user_name_or_password">Your username or password is Invalid</string>
+    <string name="nav_courses">Courses</string>
+    <string name="nav_exam">Exam</string>
+    <string name="nav_students">Students</string>
+    <string name="male_radio_group">Male</string>
+    <string name="female_radio_group">Female</string>
+    <string name="gender_label">Gender</string>
+    <string name="role_radio_group_label">Role</string>
+    <string name="role_instructor">Instructor</string>
+    <string name="role_student">Student</string>
+    <string name="student_id">id</string>
+    <string name="title_activity_course_detail">CourseDetailActivity</string>
 </resources>
