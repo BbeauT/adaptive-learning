@@ -73,7 +73,7 @@ public class CourseFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_course_list, container, false);
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://10.0.20.227/medibed/api/").
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Utils.BASE_URL).
                 addConverterFactory(GsonConverterFactory.create()).build();
 
 

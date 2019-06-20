@@ -9,13 +9,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.btarekegn.schoolapp.dummy.DummyContent;
 import com.example.btarekegn.schoolapp.dummy.DummyContent.DummyItem;
+import com.example.btarekegn.schoolapp.entity.Course;
 import com.example.btarekegn.schoolapp.entity.Quiz;
+import com.example.btarekegn.schoolapp.retrofit.AdaptiveLearningJsonApi;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A fragment representing a list of Items.
@@ -61,19 +70,50 @@ public class QuizeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_quize_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_quize_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Utils.BASE_URL).
+                addConverterFactory(GsonConverterFactory.create()).build();
+
+
+        AdaptiveLearningJsonApi adaptiveLearningJsonApi = retrofit.create(AdaptiveLearningJsonApi.class);
+
+        Call<List<Quiz>> call = adaptiveLearningJsonApi.getQuizzes();
+
+        call.enqueue(new Callback<List<Quiz>>() {
+            @Override
+            public void onResponse(Call<List<Quiz>> call, Response<List<Quiz>> response) {
+
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getContext(), response.message().toString(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (null != response.body()) {
+
+                    if (view instanceof RecyclerView) {
+                        Context context = view.getContext();
+                        RecyclerView recyclerView = (RecyclerView) view;
+                        if (mColumnCount <= 1) {
+                            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                        } else {
+                            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+                        }
+                        recyclerView.setAdapter(new MyQuizeRecyclerViewAdapter(response.body(), mListener));
+                    }
+
+                }
+
+
             }
-            recyclerView.setAdapter(new MyQuizeRecyclerViewAdapter(quizes, mListener));
-        }
+
+            @Override
+            public void onFailure(Call<List<Quiz>> call, Throwable t) {
+                Toast.makeText(getContext(), "Network Error", Toast.LENGTH_LONG).show();
+            }
+        });
+        // Set the adapter
+
         return view;
     }
 
